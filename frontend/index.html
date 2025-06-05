@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MemorySearch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen px-4">
+  <h1 class="text-4xl font-semibold text-gray-800 mb-10">MemorySearch</h1>
+
+  <form id="searchForm" class="w-full max-w-xl">
+    <div class="flex items-center border-b border-blue-500 py-2">
+      <input
+        id="queryInput"
+        class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+        type="text"
+        placeholder="Search images by description..."
+        aria-label="Image query"
+      />
+      <button
+        class="flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
+        type="submit"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+
+  <div id="results" class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-10 w-full max-w-4xl">
+    <!-- Images will appear here -->
+  </div>
+
+  <script>
+    const form = document.getElementById('searchForm');
+    const resultsDiv = document.getElementById('results');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const query = document.getElementById('queryInput').value;
+
+      const res = await fetch('http://localhost:5000/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+
+      const data = await res.json();
+      resultsDiv.innerHTML = '';
+      data.results.forEach(path => {
+        const img = document.createElement('img');
+        img.src = `http://localhost:5000/${path}`;
+        img.className = 'w-full rounded shadow';
+        resultsDiv.appendChild(img);
+      });
+    });
+  </script>
+</body>
+</html>
+

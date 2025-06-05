@@ -1,0 +1,35 @@
+# Python / PyTorch
+__pycache__/
+*.pyc
+*.pkl
+*.npy
+*.index
+*.pt
+*.pth
+
+# venv
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+# Virtual environments
+venv/
+
+# Image data
+val2017/
+*.zip
+*.jpg
+*.png
+
+# Model/data artifacts
+*.index
+*.npy
+*.pkl
+

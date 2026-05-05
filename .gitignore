@@ -22,11 +22,7 @@ Thumbs.db
 # Virtual environments
 venv/
 
-# Image data
-val2017/
-*.zip
-*.jpg
-*.png
+
 
 # Model/data artifacts
 *.index
